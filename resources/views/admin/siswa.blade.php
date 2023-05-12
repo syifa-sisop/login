@@ -183,7 +183,7 @@
               </button>
             </div>
             <div class="modal-body">
-              {!! Form::model($siswas, ['method' => 'delete', 'route' => ['datasiswa.delete', $siswa->id] ]) !!}
+              {!! Form::model($siswas, ['method' => 'delete', 'route' => ['datasiswa.destroy', $siswa->id] ]) !!}
                 <h6 class="text-center">Apakah Anda Yakin Untuk Menghapus Data Ini ?</h4>
               
 

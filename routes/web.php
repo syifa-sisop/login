@@ -42,7 +42,8 @@ Route::group(['middleware' => ['auth']], function(){
         Route::resource('datasiswa',DataSiswaController::class);
         Route::resource('absensi',AbsensiController::class);
         Route::patch('/update/{id}', ['as' => 'datasiswa.update', 'uses' => 'App\Http\Controllers\DataSiswaController@update']);
-        Route::delete('/delete/{id}', ['as' => 'datasiswa.delete', 'uses' => 'App\Http\Controllers\DataSiswaController@delete']);
+        Route::delete('/destroy/{id}', ['as' => 'datasiswa.destroy', 'uses' => 'App\Http\Controllers\DataSiswaController@destroy']);
+
 
         Route::patch('/update/{id}', ['as' => 'dataguru.update', 'uses' => 'App\Http\Controllers\DataGuruController@update']);
         Route::delete('/delete/{id}', ['as' => 'dataguru.delete', 'uses' => 'App\Http\Controllers\DataGuruController@delete']);

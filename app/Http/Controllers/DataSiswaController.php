@@ -46,7 +46,7 @@ class DataSiswaController extends Controller
         return redirect()->route('datasiswa.index')->with('success', 'Data berhasil diupdate!');
     }
 
-    public function delete($id)
+    public function destroy($id)
     {
         $siswas     = Siswa::find($id);
         $siswas->delete();
