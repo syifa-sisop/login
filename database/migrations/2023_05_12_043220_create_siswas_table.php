@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('nisn',15);
             $table->string('nama',100);
             $table->string('jenis_kelamin',15);
-            $table->string('tingkat_kelas',5);
+            //$table->string('tingkat_kelas',5);
             $table->timestamps();
         });
     }

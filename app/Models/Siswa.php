@@ -11,8 +11,8 @@ class Siswa extends Model
     protected $fillable = [
         'nama',
         'nisn',
-        'jenis_kelamin',
-        'tingkat_kelas'
+        'jenis_kelamin'
+        //'tingkat_kelas'
     ];
 }
 

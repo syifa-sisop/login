@@ -44,7 +44,7 @@
                       <th>NISN</th>
                       <th>Nama</th>
                       <th>Jenis Kelamin</th>
-                      <th>Tingkat Kelas</th>
+                      <!--<th>Tingkat Kelas</th>-->
                       <th colspan="2">Action</th>
                     </tr>
                   </thead>
@@ -55,7 +55,7 @@
                       <td>{{ $siswa->nisn }}</td>
                       <td>{{ $siswa->nama }}</td>
                       <td>{{ $siswa->jenis_kelamin }}</td>
-                      <td>{{ $siswa->tingkat_kelas }}</td>
+                     <!-- <td>{{ $siswa->tingkat_kelas }}</td>-->
 
                       <td>
                         <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#edit{{$siswa->id}}"> <i class="fas fa-edit"></i> Edit</button>
@@ -109,10 +109,10 @@
                     <input type="text" class="form-control"  name="jenis_kelamin">
                 </div>
 
-                <div class="form-group">
+               <!-- <div class="form-group">
                     <label for="exampleInputEmail1">Tingkat Kelas</label>
                     <input type="text" class="form-control"  name="tingkat_kelas">
-                </div>
+                </div>-->
 
 
             </div>
@@ -152,10 +152,10 @@
                 {!! Form::label('jenis_kelamin', 'Jenis Kelamin') !!}
                 {!! Form::text('jenis_kelamin', $siswa->jenis_kelamin, ['class' => 'form-control']) !!}
               </div> 
-              <div class="mb-3">
+              <!--<div class="mb-3">
                 {!! Form::label('tingkat_kelas', 'Tingkat Kelas') !!}
                 {!! Form::text('tingkat_kelas', $siswa->tingkat_kelas, ['class' => 'form-control']) !!}
-              </div>          
+              </div>    -->      
 
 
             </div>

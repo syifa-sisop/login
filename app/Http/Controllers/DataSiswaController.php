@@ -27,8 +27,8 @@ class DataSiswaController extends Controller
         $request->validate([
             'nama'  => 'required',
             'nisn'  => 'required',
-            'jenis_kelamin' => 'required',
-            'tingkat_kelas'  => 'required'
+            'jenis_kelamin' => 'required'
+            //'tingkat_kelas'  => 'required'
         ]);
         // simpan
         Siswa::create($request->all());
