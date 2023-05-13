@@ -19,7 +19,6 @@ class DataGuruController extends Controller
             'guru2' => $guru2,
         ]);
     }
-
     public function store(Request $request)
     {
         // validasi
