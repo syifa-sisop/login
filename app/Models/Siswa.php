@@ -14,5 +14,10 @@ class Siswa extends Model
         'jenis_kelamin'
         //'tingkat_kelas'
     ];
+
+    public function kelas()
+    {
+        return $this->belongsToMany('App\Models\Kelas', 'kelas_siswas', 'id_siswa', 'id_kelas');
+    }
 }
 
