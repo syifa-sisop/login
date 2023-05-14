@@ -54,6 +54,8 @@ Route::group(['middleware' => ['auth']], function(){
 
         Route::delete('/delete/{id}', ['as' => 'kelas.delete', 'uses' => 'App\Http\Controllers\KelasController@delete']);
 
+        Route::get('datasiswa', [App\Http\Controllers\DataSiswaController::class,'index'])->name('datasiswa.search');
+        
         
     });
     Route::group(['middleware' => ['cekUserLogin:2']],function(){

@@ -6,7 +6,6 @@
 
 @section('isi')
 
- 
 
 <div class="card">
         <div class="card-header">
@@ -29,16 +28,49 @@
                    {{ session('success') }}
           </div>
           @endif
+           @if(session()->exists('notif'))
+
+          @if(session()->get('notif')['success'])
+          {!! 
+          '<div class="alert alert-success alert-dismissable"> 
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+          <strong>Sukses! </strong>'. session()->get('notif')['msgaction'] .'
+          </div>' 
+          !!}
+          @else
+          {!! 
+          '<div class="alert alert-danger alert-dismissable"> 
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+          <strong>Gagal! </strong>'. session()->get('notif')['msgaction'] .'
+          </div>' 
+          !!}
+          @endif
+          @endif
         </div>
+
+
 
           <!--<a href="{{ route('dataguru.create') }}" class="btn btn-primary">Add New</a><br><br>-->
 
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambah">
                   Add New
                 </button><br><br>
+          <div class="py-12">
+        <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+            <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-200">
+
+                
           
-          <table class="table table-bordered">
-                  <thead>                  
+          <table id="table1" class="table table-bordered table-striped">   
+                   <thead>
+                                    <tr>
+                                        <th colspan="6">
+                                          <form action="{{ route('datasiswa.search') }}" method="GET">
+                                            <input type="text" name="s" class="form-control" placeholder="Cari...">
+                                             </form>
+                                        </th>  
+                                    </tr>            
                     <tr>
                       <th style="width: 10px">#</th>
                       <th>NISN</th>
@@ -105,8 +137,12 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Jenis Kelamin</label>
-                    <input type="text" class="form-control"  name="jenis_kelamin">
+                   <label for="jenis_kelamin">Jenis Kelamin</label>
+                                <select class="form-control" name="jenis_kelamin">
+                                    <option selected disabled>-Pilih Jenis Kelamin-</option>
+                                    <option>Laki-Laki</option>
+                                    <option>Perempuan</option>
+                                </select>
                 </div>
 
                <!-- <div class="form-group">
@@ -203,7 +239,7 @@
       <!-- /.modal -->
        @endforeach
 
-
-
 @endsection
+
+
 

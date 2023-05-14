@@ -5,7 +5,6 @@
 @endsection
 
 @section('isi')
-
 <div class="card">
         <div class="card-header">
           <h3 class="card-title">Selamat Datang, {{ $user->name }}</h3>
