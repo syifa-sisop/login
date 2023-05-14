@@ -45,7 +45,6 @@
           @endif
           @endif
         </div>
-
           <!--<a href="{{ route('dataguru.create') }}" class="btn btn-primary">Add New</a><br><br>-->
 
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add">

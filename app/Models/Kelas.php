@@ -20,8 +20,8 @@ class Kelas extends Model
     ];
     public $timestamps  = false;
 
-    public function siswa()
+    public function Siswa()
     {
-       
+        return $this->belongsToMany('App\Models\Siswa', 'kelas_siswas', 'id_kelas', 'id_siswa')->withPivot('id');
     }
 }

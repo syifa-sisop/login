@@ -83,4 +83,9 @@ class KelasController extends Controller
         return redirect()->route('kelas.index')->with('success', 'Data berhasil dihapus!');
     }
 
+    public function show($id){
+        $resource = Kelas::find($id);
+        return view('Admin/detail_kelas', ['resource'=>$resource, 'user' => Auth::user()]);
+    }
+
 }
