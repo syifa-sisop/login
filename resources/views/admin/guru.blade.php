@@ -119,6 +119,7 @@
       </div>
       <!-- /.modal -->
 
+
     @foreach($gurus as $guru)
       <div class="modal fade" id="edit{{$guru->id}}">
         <div class="modal-dialog">
@@ -170,7 +171,7 @@
               </button>
             </div>
             <div class="modal-body">
-              {!! Form::model($gurus, ['method' => 'delete', 'route' => ['dataguru.delete', $guru->id] ]) !!}
+              {!! Form::model($gurus, ['method' => 'delete', 'route' => ['dataguru.destroy', $guru->id] ]) !!}
                 <h6 class="text-center">Apakah Anda Yakin Untuk Menghapus Data Ini ?</h4>
               
 
