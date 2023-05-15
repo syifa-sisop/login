@@ -42,26 +42,33 @@
                 <div class="panel-body">
                     <div class="table-responsive">
                         <div class="table-responsive">
-                            <table id="absensi" class="table table-bordred table-striped">
+                            <form action="{{ url('/siswakelas/'.$resource->id) }}" method="GET"> 
+                            <p data-placement="top" data-toggle="tooltip" title="Add" class="pull-right">
+
+
+                                <button class="btn btn-primary btn-sm" data-title="Add" type="submit">
+                                    <span class="fas fa-plus">Tambah Siswa</span>
+                                </button>
+                            </p>
+                        </form>
+                            <table id="table1" class="table table-bordred table-striped">
                                 <thead>
                                     <tr>
-                                        <th width="2%"><input type="checkbox" id="checkall" /> </th>
-                                        <th width="3%" class="text-center">No</th>
-                                        <th width="30%">NISN</th>
-                                        <th width="30%">Nama Siswa</th>
-                                        <th width="15%" class="text-center">Jenis Kelamin</th>
-                                        <th width="5%" class="text-center">Aksi</th>
+                                        <th  class="text-center">No</th>
+                                        <th >NISN</th>
+                                        <th >Nama Siswa</th>
+                                        <th class="text-center">Jenis Kelamin</th>
+                                        <th  class="text-center">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($resource->siswa as $index => $siswa)
+                                    @foreach($data as $index => $siswa)
                                     <tr>
-                                        <td><input type="checkbox" class="checkthis" /></td>
                                         <td class="text-center">{{ $index+1 }}</td>
                                         <td>{{ $siswa->nisn}}</td>
                                         <td>{{ $siswa->nama}}</td>
-                                        <td class="text-center">@if($siswa->jenis_kelamin=="Laki-Laki"){{ "Laki-Laki" }}@else{{ "Perempuan" }}@endif</td>
-                                        <td class="text-center"><p data-placement="top" data-toggle="tooltip" title="Delete"><button data-aksi="SiswaKelas" data-id="{{$siswa->pivot->id_siswa_kelas}}" class="delete-button btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-trash"></span></button></p></td>
+                                        <td>{{ $siswa->jenis_kelamin}}</td>
+                                        <td class="text-center"><p data-placement="top" data-toggle="tooltip" title="Delete"><button data-aksi="SiswaKelas" data-id="{{$siswa->id}}" class="delete-button btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete{{$siswa->id}}"><span class="fas fa-trash"></span> Delete</button></p></td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -72,15 +79,7 @@
                         </ul>
                     </div>
                     <div class="panel-footer">
-                        <form action="{{ url('/siswakelas/'.$resource->id_kelas) }}" method="GET"> 
-                            <p data-placement="top" data-toggle="tooltip" title="Add" class="pull-right">
-
-
-                                <button class="btn btn-primary btn-sm" data-title="Add" type="submit">
-                                    <span class="glyphicon glyphicon-plus"></span>
-                                </button>
-                            </p>
-                        </form>
+                        
                     </div>
                 </div>
             </div>
@@ -89,9 +88,34 @@
             </div>
         </div><!--/.row-->
     </div>
+ @foreach($data as $index => $siswa)
+    <div class="modal fade" id="delete{{$siswa->id}}">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Hapus Data Siswa dalam Kelas</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              {!! Form::model($data, ['method' => 'delete', 'route' => ['kelas.destroy', $siswa->id] ]) !!}
+                <h6 class="text-center">Apakah Anda Yakin Untuk Menghapus Data Ini ?</h4>
+              
 
 
-
-
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              {{Form::button('<i class="fa fa-trash"></i> Delete', ['class' => 'btn btn-danger', 'type' =>'submit'])}}
+              {!! Form::close() !!}
+          
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      @endforeach
         </div>
 @endsection

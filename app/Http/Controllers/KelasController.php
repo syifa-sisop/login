@@ -20,7 +20,7 @@ class KelasController extends Controller
 
         $data = DB::table('kelas')
                     ->join('gurus', 'gurus.id', '=', 'kelas.wali_kelas')
-                    ->get();
+                    ->get(['kelas.nama_kelas','kelas.tingkat_kelas','kelas.kuota','kelas.id','kelas.thn_masuk','kelas.thn_keluar','gurus.nama']);
         //$guru2 = Kelas::latest()->get();
         
         return view('admin.kelas')->with([
@@ -85,7 +85,21 @@ class KelasController extends Controller
 
     public function show($id){
         $resource = Kelas::find($id);
-        return view('Admin/detail_kelas', ['resource'=>$resource, 'user' => Auth::user()]);
+        $data = DB::table('kelas_siswas')
+                    ->join('kelas', 'kelas.id', '=', 'kelas_siswas.id_kelas')
+                    ->join('siswas', 'siswas.id', '=', 'kelas_siswas.id_siswa')
+                    ->where('kelas_siswas.id_kelas',$id)
+                    ->get(['kelas_siswas.id','siswas.nama','siswas.nisn','siswas.jenis_kelamin']);
+
+        return view('Admin/detail_kelas', ['resource'=>$resource, 'user' => Auth::user(), 'data' =>$data]);
+    }
+
+     public function destroy($id)
+    {
+        $kelassiswa     = KelasSiswa::find($id);
+        $kelassiswa->delete();
+
+        return redirect()->route('kelas.index')->with('success', 'Data berhasil dihapus!');
     }
 
 }

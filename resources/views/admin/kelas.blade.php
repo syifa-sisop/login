@@ -64,16 +64,14 @@
                     </tr>
                   </thead>
                   <tbody>
-                    @foreach($kelas2 as $kelas)
+                    @foreach($data as $kelas)
                     <tr>
                       <td>{{ $loop->iteration }}</td>
                       <td>{{ $kelas->tingkat_kelas }}</td>
                       <td>{{ $kelas->nama_kelas }}</td>
                       <td>{{ $kelas->kuota }}</td>
                       <td>{{ $kelas->thn_masuk }}/{{ $kelas->thn_keluar }}</td>
-                       @foreach($data as $data)
-                      <td>{{ $data->nama }}</td>
-                      @endforeach
+                      <td>{{ $kelas->nama }}</td>
 
                       <td>
                         <a href="{{url('kelas/'.$kelas->id)}}"><button type="button" class="btn btn-success" > <i class="fas fa-eye"></i> Kelola</button></a>

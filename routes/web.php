@@ -7,6 +7,7 @@ use App\Http\Controllers\DataSiswaController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\LayoutController;
+use App\Http\Controllers\SiswaKelasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,8 +54,15 @@ Route::group(['middleware' => ['auth']], function(){
         //Route::delete('/delete/{id}', 'App\Http\Controllers\KelasController@delete');
 
         Route::delete('/delete/{id}', ['as' => 'kelas.delete', 'uses' => 'App\Http\Controllers\KelasController@delete']);
+        Route::delete('/destroy/{id}', ['as' => 'kelas.destroy', 'uses' => 'App\Http\Controllers\KelasController@destroy']);
 
         Route::get('datasiswa', [App\Http\Controllers\DataSiswaController::class,'index'])->name('datasiswa.search');
+
+
+        Route::post('/siswakelas/', 'App\Http\Controllers\SiswaKelasController@create');
+        Route::get('/siswakelas/{id}', 'App\Http\Controllers\SiswaKelasController@add');
+        Route::delete('/siswakelas/delete/{id}', 'App\Http\Controllers\SiswaKelasController@delete');
+
         
         
     });
