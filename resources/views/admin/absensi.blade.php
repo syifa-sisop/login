@@ -62,7 +62,7 @@
                                             <td>
                                                 @if($kelas2->absen->count()!=0)
                                                 @foreach($kelas2->absen as $absen)
-                                                    @if($absen->nis==$res->nis && $absen->pivot->tanggal==Carbon\Carbon::now('Asia/Jakarta')->format('Y-m-d'))
+                                                    @if($absen->nisn==$res->nisn && $absen->pivot->tanggal==Carbon\Carbon::now('Asia/Jakarta')->format('Y-m-d'))
                                                         <p>{{$absen->pivot->status}}</p>
                                                         @break
                                                     @else
