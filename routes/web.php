@@ -9,6 +9,7 @@ use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\LayoutController;
 use App\Http\Controllers\SiswaKelasController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -62,6 +63,9 @@ Route::group(['middleware' => ['auth']], function(){
         Route::post('/siswakelas/', 'App\Http\Controllers\SiswaKelasController@create');
         Route::get('/siswakelas/{id}', 'App\Http\Controllers\SiswaKelasController@add');
         Route::delete('/siswakelas/delete/{id}', 'App\Http\Controllers\SiswaKelasController@delete');
+
+        Route::get('/absensi/{id}', 'App\Http\Controllers\AbsensiController@show');
+        Route::post('/absensi/','App\Http\Controllers\AbsensiController@create');
 
         
         
