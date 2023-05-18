@@ -43,7 +43,7 @@ class DataGuruController extends Controller
         return redirect()->route('dataguru.index')->with('success', 'Data berhasil diupdate!');
     }
 
-    public function delete($id)
+    public function destroy($id)
     {
         $gurus     = Guru::find($id);
         $gurus->delete();
