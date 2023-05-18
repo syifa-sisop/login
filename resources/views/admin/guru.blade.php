@@ -119,7 +119,6 @@
       </div>
       <!-- /.modal -->
 
-
     @foreach($gurus as $guru)
       <div class="modal fade" id="edit{{$guru->id}}">
         <div class="modal-dialog">
@@ -192,4 +191,5 @@
        @endforeach
 
 @endsection
+
 
