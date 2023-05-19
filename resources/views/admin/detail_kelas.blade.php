@@ -83,9 +83,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-12">
-                <p class="back-link">&copy; <?php echo date('Y') ?> Arif Nurdiansyah</p>
-            </div>
+
         </div><!--/.row-->
     </div>
  @foreach($data as $index => $siswa)
