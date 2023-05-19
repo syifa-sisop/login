@@ -38,7 +38,7 @@
           <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-primary">
-                <div class="panel-heading">Data Kelas</div>
+                <div class="panel-heading">Data Siswa</div>
                 <div class="panel-body">
                     <div class="table-responsive">
                         <div class="table-responsive">
@@ -83,9 +83,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-12">
-                <p class="back-link">&copy; <?php echo date('Y') ?> Arif Nurdiansyah</p>
-            </div>
+
         </div><!--/.row-->
     </div>
  @foreach($data as $index => $siswa)
