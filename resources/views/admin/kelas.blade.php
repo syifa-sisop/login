@@ -270,7 +270,7 @@
               </button>
             </div>
             <div class="modal-body">
-              {!! Form::model($dt, ['method' => 'delete', 'route' => ['kelas.delete', $dt->id] ]) !!}
+              {!! Form::model($dt, ['method' => 'delete', 'route' => ['kelas.destroy', $dt->id] ]) !!}
                 <h6 class="text-center">Apakah Anda Yakin Untuk Menghapus Data Ini ?</h4>
               
 

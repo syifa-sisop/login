@@ -32,7 +32,7 @@ class KelasController extends Controller
            // 'guru2' => $guru2,
         ]);
     }
-    public function create(Request $request)
+    public function store(Request $request)
     {
         $check = Kelas::where(['tingkat_kelas' => $request->tingkat_kelas, 
             'nama_kelas' => $request->nama_kelas, 'thn_masuk' => $request->thn_masuk, 'thn_keluar' => $request->thn_keluar])->get();
@@ -69,19 +69,6 @@ class KelasController extends Controller
         return redirect()->route('kelas.index')->with('success', 'Data berhasil diupdate!');
     }
 
-    public function delete($id)
-    {
-        $kelas     = Kelas::find($id);
-        $data = DB::table('kelas_siswas')
-                    ->join('kelas', 'kelas.id', '=', 'kelas_siswas.id_kelas')
-                    ->where('kelas.id', $id)
-                    ->get();
-
-        //$data->each()->delete();
-        $kelas->delete();
-
-        return redirect()->route('kelas.index')->with('success', 'Data berhasil dihapus!');
-    }
 
     public function show($id){
         $resource = Kelas::find($id);
@@ -96,8 +83,14 @@ class KelasController extends Controller
 
      public function destroy($id)
     {
-        $kelassiswa     = KelasSiswa::find($id);
-        $kelassiswa->delete();
+        $kelas     = Kelas::find($id);
+        $data = DB::table('kelas_siswas')
+                    ->join('kelas', 'kelas.id', '=', 'kelas_siswas.id_kelas')
+                    ->where('kelas.id', $id)
+                    ->get();
+
+        //$data->each()->delete();
+        $kelas->delete();
 
         return redirect()->route('kelas.index')->with('success', 'Data berhasil dihapus!');
     }

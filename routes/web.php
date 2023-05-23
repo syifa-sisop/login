@@ -46,16 +46,6 @@ Route::group(['middleware' => ['auth']], function(){
         Route::delete('/destroy/{id}', ['as' => 'datasiswa.destroy', 'uses' => 'App\Http\Controllers\DataSiswaController@destroy']);
 
 
-        Route::patch('/update/{id}', ['as' => 'dataguru.update', 'uses' => 'App\Http\Controllers\DataGuruController@update']);
-        Route::delete('/delete/{id}', ['as' => 'dataguru.delete', 'uses' => 'App\Http\Controllers\DataGuruController@delete']);
-
-        Route::post('/kelas/', 'App\Http\Controllers\KelasController@create');
-        Route::put('/kelas/', 'App\Http\Controllers\KelasController@update');
-        //Route::delete('/delete/{id}', 'App\Http\Controllers\KelasController@delete');
-
-        Route::delete('/delete/{id}', ['as' => 'kelas.delete', 'uses' => 'App\Http\Controllers\KelasController@delete']);
-        Route::delete('/destroy/{id}', ['as' => 'kelas.destroy', 'uses' => 'App\Http\Controllers\KelasController@destroy']);
-
         Route::get('datasiswa', [App\Http\Controllers\DataSiswaController::class,'index'])->name('datasiswa.search');
 
 
