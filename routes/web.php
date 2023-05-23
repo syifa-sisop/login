@@ -48,9 +48,6 @@ Route::group(['middleware' => ['auth']], function(){
         Route::delete('/destroy/{id}', ['as' => 'datasiswa.destroy', 'uses' => 'App\Http\Controllers\DataSiswaController@destroy']);
 
 
-        Route::patch('/update/{id}', ['as' => 'dataguru.update', 'uses' => 'App\Http\Controllers\DataGuruController@update']);
-        Route::delete('/destroy/{id}', ['as' => 'dataguru.destroy', 'uses' => 'App\Http\Controllers\DataGuruController@destroy']);
-
         Route::post('/kelas/', 'App\Http\Controllers\KelasController@create');
         Route::put('/kelas/', 'App\Http\Controllers\KelasController@update');
         //Route::delete('/delete/{id}', 'App\Http\Controllers\KelasController@delete');
