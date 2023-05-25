@@ -45,18 +45,10 @@ Route::group(['middleware' => ['auth']], function(){
 
         Route::delete('/delete/{id}',[KelasController::class, 'delete'])->name('delete');
 
-        Route::patch('/update/{id}', ['as' => 'datasiswa.update', 'uses' => 'App\Http\Controllers\DataSiswaController@update']);
-        Route::delete('/destroy/{id}', ['as' => 'datasiswa.destroy', 'uses' => 'App\Http\Controllers\DataSiswaController@destroy']);
+        Route::get('datasiswa', [DataSiswaController::class,'index'])->name('datasiswa');
 
-
-        Route::get('datasiswa', [App\Http\Controllers\DataSiswaController::class,'index'])->name('datasiswa.search');
-
-
-        Route::post('/siswakelas/', 'App\Http\Controllers\SiswaKelasController@create');
-        Route::get('/siswakelas/{id}', 'App\Http\Controllers\SiswaKelasController@add');
-        Route::delete('/siswakelas/delete/{id}', 'App\Http\Controllers\SiswaKelasController@delete');
-
-        
+         Route::post('/absensi/','App\Http\Controllers\AbsensiController@create');
+    
         
     });
     Route::group(['middleware' => ['cekUserLogin:2']],function(){
