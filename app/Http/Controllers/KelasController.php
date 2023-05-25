@@ -18,10 +18,8 @@ class KelasController extends Controller
         $kelas   = Kelas::all();
         $kelas2  = Kelas::paginate(5);
 
-        $data = DB::table('kelas')
-                    ->join('gurus', 'gurus.id', '=', 'kelas.wali_kelas')
-                    ->get(['kelas.nama_kelas','kelas.tingkat_kelas','kelas.kuota','kelas.id','kelas.thn_masuk','kelas.thn_keluar','gurus.nama']);
-        //$guru2 = Kelas::latest()->get();
+        $this->model = new Kelas;
+        $data = $this->model->show();
         
         return view('admin.kelas')->with([
             'user' => Auth::user(),
@@ -29,13 +27,14 @@ class KelasController extends Controller
             'guru'  => $guru,
             'guru2' => $guru2,
             'data'  => $data,
-           // 'guru2' => $guru2,
+
         ]);
     }
     public function store(Request $request)
     {
         $check = Kelas::where(['tingkat_kelas' => $request->tingkat_kelas, 
             'nama_kelas' => $request->nama_kelas, 'thn_masuk' => $request->thn_masuk, 'thn_keluar' => $request->thn_keluar])->get();
+
         if($check->count()>0){
             session()->flash('notif', array('success' => false, 'msgaction' => 'Tambah Data Gagal, Data Telah Ada!'));
             return redirect()->route('kelas.index');
@@ -69,14 +68,11 @@ class KelasController extends Controller
         return redirect()->route('kelas.index')->with('success', 'Data berhasil diupdate!');
     }
 
-
     public function show($id){
         $resource = Kelas::find($id);
-        $data = DB::table('kelas_siswas')
-                    ->join('kelas', 'kelas.id', '=', 'kelas_siswas.id_kelas')
-                    ->join('siswas', 'siswas.id', '=', 'kelas_siswas.id_siswa')
-                    ->where('kelas_siswas.id_kelas',$id)
-                    ->get(['kelas_siswas.id','siswas.nama','siswas.nisn','siswas.jenis_kelamin']);
+        
+        $this->model = new Kelas;
+        $data = $this->model->tampil_siswa($id);
 
         return view('Admin/detail_kelas', ['resource'=>$resource, 'user' => Auth::user(), 'data' =>$data]);
     }
@@ -84,15 +80,19 @@ class KelasController extends Controller
      public function destroy($id)
     {
         $kelas     = Kelas::find($id);
-        $data = DB::table('kelas_siswas')
-                    ->join('kelas', 'kelas.id', '=', 'kelas_siswas.id_kelas')
-                    ->where('kelas.id', $id)
-                    ->get();
 
-        //$data->each()->delete();
         $kelas->delete();
 
         return redirect()->route('kelas.index')->with('success', 'Data berhasil dihapus!');
+    }
+
+    public function delete($id)
+    {
+        $siswa     = KelasSiswa::find($id);
+ 
+        $siswa->delete();
+
+        return redirect()->route('kelas.show')->with('success', 'Data berhasil dihapus!');
     }
 
 }

@@ -86,6 +86,7 @@
 
         </div><!--/.row-->
     </div>
+
  @foreach($data as $index => $siswa)
     <div class="modal fade" id="delete{{$siswa->id}}">
         <div class="modal-dialog">
@@ -97,7 +98,7 @@
               </button>
             </div>
             <div class="modal-body">
-              {!! Form::model($data, ['method' => 'delete', 'route' => ['kelas.destroy', $siswa->id] ]) !!}
+              {!! Form::model($data, ['method' => 'delete', 'route' => ['delete', $siswa->id] ]) !!}
                 <h6 class="text-center">Apakah Anda Yakin Untuk Menghapus Data Ini ?</h4>
               
 
