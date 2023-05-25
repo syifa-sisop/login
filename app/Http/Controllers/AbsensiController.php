@@ -13,11 +13,9 @@ use DB;
 class AbsensiController extends Controller
 {
      public function index(){
-        $kelas      = Kelas::all();
         $kelas2     = Kelas::paginate(5);
-        $data       = DB::table('kelas')
-                    ->join('gurus', 'gurus.id', '=', 'kelas.wali_kelas')
-                    ->get(['kelas.nama_kelas','kelas.tingkat_kelas','kelas.kuota','kelas.id','kelas.thn_masuk','kelas.thn_keluar','gurus.nama']);
+        $this->model = new Absensi;
+        $data = $this->model->tampil_absen();
 
         return view('admin/listkelas', ['kelas2'=>$kelas2, 'user' => Auth::user(), 'data'=> $data]);
     }

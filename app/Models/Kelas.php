@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 
+
 class Kelas extends Model
 {
     use HasFactory;
@@ -30,4 +31,6 @@ class Kelas extends Model
     {    
         return $this->belongsToMany('App\Models\Siswa', 'absensis', 'id_kelas', 'id_siswa')->withPivot('status', 'tanggal', 'keterangan')->wherePivot('tanggal', Carbon::now('Asia/Jakarta')->format('Y-m-d'));
     }
+
+    
 }
