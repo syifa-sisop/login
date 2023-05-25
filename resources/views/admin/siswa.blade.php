@@ -48,10 +48,6 @@
           @endif
         </div>
 
-
-
-          <!--<a href="{{ route('dataguru.create') }}" class="btn btn-primary">Add New</a><br><br>-->
-
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambah">
                   Add New
                 </button><br><br>
@@ -66,8 +62,8 @@
                    <thead>
                                     <tr>
                                         <th colspan="6">
-                                          <form action="{{ route('datasiswa.search') }}" method="GET">
-                                            <input type="text" name="s" class="form-control" placeholder="Cari...">
+                                          <form action="{{ route('datasiswa') }}" method="GET">
+                                            <input type="search" name="s" class="form-control" placeholder="Cari...">
                                              </form>
                                         </th>  
                                     </tr>            
@@ -76,7 +72,6 @@
                       <th>NISN</th>
                       <th>Nama</th>
                       <th>Jenis Kelamin</th>
-                      <!--<th>Tingkat Kelas</th>-->
                       <th colspan="2">Action</th>
                     </tr>
                   </thead>
@@ -87,7 +82,6 @@
                       <td>{{ $siswa->nisn }}</td>
                       <td>{{ $siswa->nama }}</td>
                       <td>{{ $siswa->jenis_kelamin }}</td>
-                     <!-- <td>{{ $siswa->tingkat_kelas }}</td>-->
 
                       <td>
                         <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#edit{{$siswa->id}}"> <i class="fas fa-edit"></i> Edit</button>
