@@ -8,6 +8,7 @@ use App\Http\Controllers\KelasController;
 use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\LayoutController;
 use App\Http\Controllers\SiswaKelasController;
+use App\Http\Controllers\RekapController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +44,7 @@ Route::group(['middleware' => ['auth']], function(){
         Route::resource('datasiswa',DataSiswaController::class);
         Route::resource('absensi',AbsensiController::class);
         Route::resource('siswakelas',SiswaKelasController::class);
+        Route::resource('rekap',RekapController::class);
 
         Route::delete('/delete/{id}',[KelasController::class, 'delete'])->name('delete');
 
