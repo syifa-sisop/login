@@ -42,6 +42,7 @@ Route::group(['middleware' => ['auth']], function(){
         Route::resource('kelas',KelasController::class);
         Route::resource('datasiswa',DataSiswaController::class);
         Route::resource('absensi',AbsensiController::class);
+        Route::resource('siswakelas',SiswaKelasController::class);
 
         Route::delete('/delete/{id}',[KelasController::class, 'delete'])->name('delete');
 

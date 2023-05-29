@@ -30,32 +30,13 @@ class KelasController extends Controller
 
         ]);
     }
+
     public function store(Request $request)
     {
-        $check = Kelas::where(['tingkat_kelas' => $request->tingkat_kelas, 
-            'nama_kelas' => $request->nama_kelas, 'thn_masuk' => $request->thn_masuk, 'thn_keluar' => $request->thn_keluar])->get();
-
-        if($check->count()>0){
-            session()->flash('notif', array('success' => false, 'msgaction' => 'Tambah Data Gagal, Data Telah Ada!'));
-            return redirect()->route('kelas.index');
-        }
-        else{
-            $Kelas = new Kelas;
-            $Kelas->tingkat_kelas = $request->tingkat_kelas;
-            $Kelas->nama_kelas = $request->nama_kelas;
-            $Kelas->kuota = $request->kuota;
-            $Kelas->thn_masuk = $request->thn_masuk;
-            $Kelas->thn_keluar = $request->thn_keluar;
-            $Kelas->wali_kelas = $request->wali_kelas;
-            if($Kelas->save()){
-                session()->flash('notif', array('success' => true, 'msgaction' => 'Tambah Data Berhasil!'));
-            }
-            else{
-                session()->flash('notif', array('success' => false, 'msgaction' => 'Tambah Data Gagal, Silahkan Ulangi!'));
-            }
-            return redirect()->route('kelas.index');
-        }
-
+        
+        $this->model = new Kelas;
+        $this->model->tambah_data($request);
+        return redirect()->route('kelas.index');
     }
 
     public function update(Request $request, $id)
@@ -92,7 +73,7 @@ class KelasController extends Controller
  
         $siswa->delete();
 
-        return redirect()->route('kelas.show')->with('success', 'Data berhasil dihapus!');
+        return redirect()->route('kelas.index')->with('success', 'Data berhasil dihapus!');
     }
 
 }
