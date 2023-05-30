@@ -25,10 +25,12 @@ class Absensi extends Model
 
     public function tampil_absen()
     {
-       $data       = DB::table('kelas')
+        
+       $data = DB::table('kelas')
+                    ->select('kelas.nama_kelas','kelas.tingkat_kelas','kelas.kuota','kelas.id','kelas.thn_masuk','kelas.thn_keluar','gurus.nama')
                     ->join('gurus', 'gurus.id', '=', 'kelas.wali_kelas')
-                    ->get(['kelas.nama_kelas','kelas.tingkat_kelas','kelas.kuota','kelas.id','kelas.thn_masuk','kelas.thn_keluar','gurus.nama']);
-       return $data;
+                    ->get();
+        return $data;
     }
 
     public function tambah_data($request)
