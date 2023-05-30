@@ -10,19 +10,25 @@ class Rekap extends Model
 {
     public function show()
     {
+
         $data = DB::table('kelas')
+                    ->select('kelas.nama_kelas','kelas.tingkat_kelas','kelas.kuota','kelas.id','kelas.thn_masuk','kelas.thn_keluar','gurus.nama')
                     ->join('gurus', 'gurus.id', '=', 'kelas.wali_kelas')
-                    ->get(['kelas.nama_kelas','kelas.tingkat_kelas','kelas.kuota','kelas.id','kelas.thn_masuk','kelas.thn_keluar','gurus.nama']);
+                    ->get();
+
         return $data;
     }
 
     public function tampil_data($id)
     {
+        
         $data = DB::table('absensis')
+                    ->select('absensis.id','absensis.status','absensis.tanggal','siswas.nama','siswas.nisn','siswas.jenis_kelamin')
                     ->join('kelas', 'kelas.id', '=', 'absensis.id_kelas')
                     ->join('siswas', 'siswas.id', '=', 'absensis.id_siswa')
                     ->where('absensis.id_kelas',$id)
-                    ->get(['absensis.id','siswas.nama','siswas.nisn','siswas.jenis_kelamin', 'absensis.status', 'absensis.tanggal']);
+                    ->get();
         return $data;
     }
+
 }
