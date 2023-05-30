@@ -16,7 +16,6 @@ class RekapController extends Controller
         $this->model = new Rekap;
         $data = $this->model->show();
         
-        
         return view('admin.rekap')->with([
             'user'      => Auth::user(),
             'data'      => $data,
