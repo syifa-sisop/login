@@ -24,7 +24,7 @@ class Kelas extends Model
     public $timestamps  = false;
 
     public function absen()
-    {    
+    {   
         return $this->belongsToMany('App\Models\Siswa', 'absensis', 'id_kelas', 'id_siswa')->withPivot('status', 'tanggal', 'keterangan')->wherePivot('tanggal', Carbon::now('Asia/Jakarta')->format('Y-m-d'));
     }
 
@@ -44,7 +44,6 @@ class Kelas extends Model
 
     public function tampil_siswa($id)
     {
-        //$kelas     = Kelas::find($id);
         $data = DB::table('kelas_siswas')
                     ->join('kelas', 'kelas.id', '=', 'kelas_siswas.id_kelas')
                     ->join('siswas', 'siswas.id', '=', 'kelas_siswas.id_siswa')

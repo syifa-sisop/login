@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Kelas;
 use App\Models\Guru;
 use App\Models\KelasSiswa;
-use DB; 
 
 class KelasController extends Controller
 {
@@ -27,7 +26,6 @@ class KelasController extends Controller
             'guru'  => $guru,
             'guru2' => $guru2,
             'data'  => $data,
-
         ]);
     }
 
