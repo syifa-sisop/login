@@ -8,7 +8,6 @@ use App\Models\KelasSiswa;
 use App\Models\Absensi;
 use App\Models\Kelas;
 
-
 class AbsensiController extends Controller
 {
      public function index()
