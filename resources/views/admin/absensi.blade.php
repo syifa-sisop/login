@@ -3,7 +3,6 @@
 @section('judul')
   Halaman Absensi 
 @endsection
-
 @section('isi')
 
 <div class="card">

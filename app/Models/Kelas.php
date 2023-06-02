@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use DB;
+use Carbon\Carbon;
 
 class Kelas extends Model
 {
@@ -21,6 +22,11 @@ class Kelas extends Model
     ];
     
     public $timestamps  = false;
+
+    public function absen()
+    {    
+        return $this->belongsToMany('App\Models\Siswa', 'absensis', 'id_kelas', 'id_siswa')->withPivot('status', 'tanggal', 'keterangan')->wherePivot('tanggal', Carbon::now('Asia/Jakarta')->format('Y-m-d'));
+    }
 
     public function Siswa()
     {
