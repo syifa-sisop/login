@@ -36,5 +36,25 @@ class Siswa extends Model
 
         return $siswas;
     }
+
+    public function tambah_data($request)
+    {
+
+        $check = Siswa::where(['nisn' => $request->nisn])->get();
+        if($check->count()>0){
+            session()->flash('notif', array('success' => false, 'msgaction' => 'Tambah Data Gagal, Data Telah Ada!'));
+            return redirect()->route('datasiswa');
+        }else{
+            $request->validate([
+            'nama'  => 'required',
+            'nisn'  => 'required',
+            'jenis_kelamin' => 'required'
+            //'tingkat_kelas'  => 'required'
+        ]);
+        // simpan
+        Siswa::create($request->all());
+        }
+
+    }
 }
 
