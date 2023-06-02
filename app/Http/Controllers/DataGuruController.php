@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Guru;
 
+
 class DataGuruController extends Controller
 {
     public function index()
@@ -43,7 +44,7 @@ class DataGuruController extends Controller
         return redirect()->route('dataguru.index')->with('success', 'Data berhasil diupdate!');
     }
 
-    public function delete($id)
+    public function destroy($id)
     {
         $gurus     = Guru::find($id);
         $gurus->delete();
