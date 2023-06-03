@@ -45,9 +45,5 @@ class DataSiswaController extends Controller
 
         return redirect()->route('datasiswa')->with('success', 'Data berhasil dihapus!');
     }
-
-
-    
-
 }
 
