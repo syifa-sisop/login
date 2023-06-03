@@ -38,8 +38,7 @@ class Absensi extends Model
 
         for($i=0;$i<count($request->siswa);$i++){
             
-            $check = Absensi::where(['id_siswa' => $request->siswa[$i],'id_kelas' => $request->kelas, 'tanggal' => Carbon::now('Asia/Jakarta')
-                                    ->format('Y-m-d')])->get();
+            $check = Absensi::where(['id_siswa' => $request->siswa[$i],'id_kelas' => $request->kelas, 'tanggal' => date('Y-m-d')])->get();
 
             if(count($check) == 0 && $request->status[$i] != "Hadir"){
                 
