@@ -24,9 +24,16 @@ class Absensi extends Model
 
     public function tampil_absen()
     {
-        
        $data = DB::table('kelas')
-                    ->select('kelas.nama_kelas','kelas.tingkat_kelas','kelas.kuota','kelas.id','kelas.thn_masuk','kelas.thn_keluar','gurus.nama')
+                    ->select(
+                        'kelas.nama_kelas',
+                        'kelas.tingkat_kelas',
+                        'kelas.kuota',
+                        'kelas.id',
+                        'kelas.thn_masuk',
+                        'kelas.thn_keluar',
+                        'gurus.nama'
+                    )
                     ->join('gurus', 'gurus.id', '=', 'kelas.wali_kelas')
                     ->get();
         return $data;
@@ -34,10 +41,13 @@ class Absensi extends Model
 
     public function tambah_data($request)
     {
-
         for($i=0;$i<count($request->siswa);$i++){
             
-            $check = Absensi::where(['id_siswa' => $request->siswa[$i],'id_kelas' => $request->kelas, 'tanggal' => date('Y-m-d')])->get();
+            $check = Absensi::where([
+                                    'id_siswa'  => $request->siswa[$i],
+                                    'id_kelas'  => $request->kelas, 
+                                    'tanggal'   => date('Y-m-d')
+                                    ])->get();
 
             if(count($check) == 0 && $request->status[$i] != "Hadir"){
                 
@@ -50,10 +60,7 @@ class Absensi extends Model
                 $absen->save();
 
             }
-
-
         }
-
     }
 }
 
