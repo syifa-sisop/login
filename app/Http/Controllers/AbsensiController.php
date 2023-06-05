@@ -13,18 +13,24 @@ class AbsensiController extends Controller
      public function index()
      {
 
-        $kelas2     = Kelas::paginate(5);
-        $this->model = new Absensi;
-        $data = $this->model->tampil_absen();
+        $kelas2         = Kelas::paginate(5);
+        $this->model    = new Absensi;
+        $data           = $this->model->tampil_absen();
 
-        return view('admin/listkelas', ['kelas2'=>$kelas2, 'user' => Auth::user(), 'data'=> $data]);
+        return view('admin/listkelas')->with([
+            'kelas2'    =>$kelas2, 
+            'user'      => Auth::user(), 
+            'data'      => $data,
+        ]);
     }
 
     public function show($id)
     {
-
         $kelas2 = Kelas::find($id);
-        return view('admin/absensi',['kelas2'=>$kelas2,'user' => Auth::user()]);
+        return view('admin/absensi')->with([        
+            'kelas2'    =>$kelas2,
+            'user'      => Auth::user(),
+        ]);
     }
 
     public function create(Request $request)

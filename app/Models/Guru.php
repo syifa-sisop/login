@@ -13,4 +13,14 @@ class Guru extends Model
         'nip',
         'jenis_kelamin'
     ];
+
+    public function tambah_data($request)
+    {
+        $request->validate([
+            'nama'          => 'required',
+            'nip'           => 'required',
+            'jenis_kelamin' => 'required'
+        ]);
+        Guru::create($request->all());
+    }
 }
