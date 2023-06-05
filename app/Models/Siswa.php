@@ -22,19 +22,19 @@ class Siswa extends Model
 
     public function search($request)
     {
-        $siswas = Siswa::where([
+        $siswa = Siswa::where([
             ['nama', '!=', Null],
             [function ($query) use ($request) {
                 if (($s = $request->s)) {
                     $query->orWhere('nama', 'LIKE', '%' . $s . '%')
-                        ->orWhere('nisn', 'LIKE', '%' . $s . '%')
-                        ->orWhere('jenis_kelamin', 'LIKE', '%' . $s . '%')
-                        ->get();
+                          ->orWhere('nisn', 'LIKE', '%' . $s . '%')
+                          ->orWhere('jenis_kelamin', 'LIKE', '%' . $s . '%')
+                          ->get();
                 }
             }]
         ])->paginate(5);
 
-        return $siswas;
+        return $siswa;
     }
 
     public function tambah_data($request)
@@ -46,12 +46,10 @@ class Siswa extends Model
             return redirect()->route('datasiswa');
         }else{
             $request->validate([
-            'nama'  => 'required',
-            'nisn'  => 'required',
+            'nama'          => 'required',
+            'nisn'          => 'required',
             'jenis_kelamin' => 'required'
-            //'tingkat_kelas'  => 'required'
         ]);
-        // simpan
         Siswa::create($request->all());
         }
 

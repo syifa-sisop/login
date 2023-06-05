@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\KelasSiswa;
 use App\Models\Absensi;
 use App\Models\Kelas;
 
@@ -33,4 +32,5 @@ class AbsensiController extends Controller
         $this->model->tambah_data($request);
         return redirect('/absensi');
     }
+
 }

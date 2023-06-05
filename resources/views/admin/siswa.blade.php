@@ -66,7 +66,7 @@
                    <thead>
                                     <tr>
                                         <th colspan="6">
-                                          <form action="{{ route('datasiswa.search') }}" method="GET">
+                                          <form action="{{ route('datasiswa.index') }}" method="GET">
                                             <input type="text" name="s" class="form-control" placeholder="Cari...">
                                              </form>
                                         </th>  
@@ -81,7 +81,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    @foreach($siswas as $siswa)
+                    @foreach($siswa as $siswa)
                     <tr>
                       <td>{{ $loop->iteration }}</td>
                       <td>{{ $siswa->nisn }}</td>
@@ -105,7 +105,7 @@
                     @endforeach
                   </tbody>
                 </table><br>
-                {{ $siswas->links()}}
+                {{ $siswa->links()}}
                 <br>
         </div>
         <!-- /.card-body -->
@@ -164,7 +164,7 @@
       </div>
       <!-- /.modal -->
 
-@foreach($siswas as $siswa)
+@foreach($siswa as $siswa)
       <div class="modal fade" id="edit{{$siswa->id}}">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -175,7 +175,7 @@
               </button>
             </div>
             <div class="modal-body">
-              {!! Form::model($siswas, ['method' => 'patch', 'route' => ['datasiswa.update', $siswa->id] ]) !!}
+              {!! Form::model($siswa, ['method' => 'patch', 'route' => ['datasiswa.update', $siswa->id] ]) !!}
               <div class="mb-3">
                 {!! Form::label('nisn', 'NISN') !!}
                 {!! Form::text('nisn', $siswa->nisn, ['class' => 'form-control']) !!}
@@ -219,7 +219,7 @@
               </button>
             </div>
             <div class="modal-body">
-              {!! Form::model($siswas, ['method' => 'delete', 'route' => ['datasiswa.destroy', $siswa->id] ]) !!}
+              {!! Form::model($siswa, ['method' => 'delete', 'route' => ['datasiswa.destroy', $siswa->id] ]) !!}
                 <h6 class="text-center">Apakah Anda Yakin Untuk Menghapus Data Ini ?</h4>
               
 

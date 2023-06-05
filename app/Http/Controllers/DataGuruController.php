@@ -11,20 +11,21 @@ class DataGuruController extends Controller
     {
         $guru   = Guru::all();
         $gurus  = Guru::paginate(5);
-        $guru2 = Guru::latest()->get();
+        $guru2  = Guru::latest()->get();
         
         return view('admin.guru')->with([
-            'user' => Auth::user(),
+            'user'  => Auth::user(),
             'gurus' => $gurus,
             'guru2' => $guru2,
         ]);
     }
+
     public function store(Request $request)
     {
         // validasi
         $request->validate([
-            'nama'  => 'required',
-            'nip'  => 'required',
+            'nama'          => 'required',
+            'nip'           => 'required',
             'jenis_kelamin' => 'required'
         ]);
         // simpan
