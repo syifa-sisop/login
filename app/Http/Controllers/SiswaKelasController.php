@@ -12,8 +12,12 @@ class SiswaKelasController extends Controller
 {
     public function show($id)
     {
-        $resource=Siswa::get();
-        return view('Admin/SiswaKelas',['resource'=>$resource, 'kelas'=>$id,'user' => Auth::user()]);
+        $resource = Siswa::get();
+        return view('Admin/SiswaKelas')->with([
+            'resource'  => $resource, 
+            'kelas'     => $id,
+            'user'      => Auth::user(),
+        ]);
     }
 
     public function store(Request $request)

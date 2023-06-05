@@ -11,24 +11,25 @@ class RekapController extends Controller
 {
     public function index()
     {
-        $kelas2  = Kelas::paginate(5);
-
-        $this->model = new Rekap;
-        $data = $this->model->show();
+        $kelas2         = Kelas::paginate(5);
+        $this->model    = new Rekap;
+        $data           = $this->model->show();
         
         return view('admin.rekap')->with([
             'user'      => Auth::user(),
             'data'      => $data,
             'kelas2'    => $kelas2,
-           
         ]);
     }
 
     public function show($id)
     {
-        $this->model = new Rekap;
-        $data = $this->model->tampil_data($id);
+        $this->model    = new Rekap;
+        $data           = $this->model->tampil_data($id);
 
-        return view('Admin/detail_absen', ['user' => Auth::user(), 'data' =>$data]);
+        return view('Admin/detail_absen')->with([
+            'user' => Auth::user(), 
+            'data' =>$data,
+        ]);
     }
 }

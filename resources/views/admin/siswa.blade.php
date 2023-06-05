@@ -66,7 +66,7 @@
                    <thead>
                                     <tr>
                                         <th colspan="6">
-                                          <form action="{{ route('datasiswa.index') }}" method="GET">
+                                          <form action="{{ route('datasiswa') }}" method="GET">
                                             <input type="text" name="s" class="form-control" placeholder="Cari...">
                                              </form>
                                         </th>  
@@ -81,21 +81,20 @@
                     </tr>
                   </thead>
                   <tbody>
-                    @foreach($siswa as $siswa)
+                    @foreach($siswa as $murid)
                     <tr>
                       <td>{{ $loop->iteration }}</td>
-                      <td>{{ $siswa->nisn }}</td>
-                      <td>{{ $siswa->nama }}</td>
-                      <td>{{ $siswa->jenis_kelamin }}</td>
-                     <!-- <td>{{ $siswa->tingkat_kelas }}</td>-->
+                      <td>{{ $murid->nisn }}</td>
+                      <td>{{ $murid->nama }}</td>
+                      <td>{{ $murid->jenis_kelamin }}</td>
 
                       <td>
-                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#edit{{$siswa->id}}"> <i class="fas fa-edit"></i> Edit</button>
+                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#edit{{$murid->id}}"> <i class="fas fa-edit"></i> Edit</button>
                         
                       </td>
 
                       <td>
-                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete{{$siswa->id}}"> <i class="fas fa-trash"></i> Delete</button>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete{{$murid->id}}"> <i class="fas fa-trash"></i> Delete</button>
                        
                        
                       </td>

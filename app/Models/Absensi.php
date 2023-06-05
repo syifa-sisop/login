@@ -60,9 +60,7 @@ class Absensi extends Model
                 $absen->status      = $request->status[$i];
                 $absen->keterangan  = $request->status[$i];
                 $absen->save();
-
             }
-
 
         }
 

@@ -10,11 +10,11 @@ class DataSiswaController extends Controller
 {
     public function index(Request $request)
     {
-        $this->model = new Siswa;
-        $siswa = $this->model->search($request);
+        $this->model    = new Siswa;
+        $siswa          = $this->model->search($request);
 
         return view('admin.siswa')->with([
-            'user' => Auth::user(),
+            'user'  => Auth::user(),
             'siswa' => $siswa,
         ]);
     }
@@ -37,7 +37,7 @@ class DataSiswaController extends Controller
 
     public function destroy($id)
     {
-        $siswas     = Siswa::find($id);
+        $siswas  = Siswa::find($id);
         $siswas->delete();
 
         return redirect()->route('datasiswa')->with('success', 'Data berhasil dihapus!');
