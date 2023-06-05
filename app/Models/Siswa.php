@@ -12,7 +12,6 @@ class Siswa extends Model
         'nama',
         'nisn',
         'jenis_kelamin'
-        //'tingkat_kelas'
     ];
 
     public function kelas()
@@ -39,7 +38,6 @@ class Siswa extends Model
 
     public function tambah_data($request)
     {
-
         $check = Siswa::where(['nisn' => $request->nisn])->get();
         if($check->count()>0){
             session()->flash('notif', array('success' => false, 'msgaction' => 'Tambah Data Gagal, Data Telah Ada!'));
@@ -50,7 +48,6 @@ class Siswa extends Model
             'nisn'          => 'required',
             'jenis_kelamin' => 'required'
         ]);
-        // simpan
         Siswa::create($request->all());
         }
 

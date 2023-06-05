@@ -12,7 +12,6 @@ class RekapController extends Controller
     public function index()
     {
         $kelas2         = Kelas::paginate(5);
-
         $this->model    = new Rekap;
         $data           = $this->model->show();
         
