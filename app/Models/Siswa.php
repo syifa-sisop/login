@@ -22,7 +22,7 @@ class Siswa extends Model
 
     public function search($request)
     {
-        $siswas = Siswa::where([
+        $siswa = Siswa::where([
             ['nama', '!=', Null],
             [function ($query) use ($request) {
                 if (($s = $request->s)) {
@@ -34,7 +34,7 @@ class Siswa extends Model
             }]
         ])->paginate(5);
 
-        return $siswas;
+        return $siswa;
     }
 
     public function tambah_data($request)
@@ -46,8 +46,8 @@ class Siswa extends Model
             return redirect()->route('datasiswa');
         }else{
             $request->validate([
-            'nama'  => 'required',
-            'nisn'  => 'required',
+            'nama'          => 'required',
+            'nisn'          => 'required',
             'jenis_kelamin' => 'required'
             //'tingkat_kelas'  => 'required'
         ]);

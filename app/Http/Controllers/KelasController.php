@@ -12,20 +12,20 @@ class KelasController extends Controller
 {
     public function index()
     {
-        $guru   = Guru::all();
+        $guru    = Guru::all();
         $guru2   = Guru::all();
         $kelas   = Kelas::all();
         $kelas2  = Kelas::paginate(5);
 
-        $this->model = new Kelas;
-        $data = $this->model->show();
+        $this->model    = new Kelas;
+        $data           = $this->model->show();
         
         return view('admin.kelas')->with([
-            'user' => Auth::user(),
-            'kelas2' => $kelas2,
-            'guru'  => $guru,
-            'guru2' => $guru2,
-            'data'  => $data,
+            'user'      => Auth::user(),
+            'kelas2'    => $kelas2,
+            'guru'      => $guru,
+            'guru2'     => $guru2,
+            'data'      => $data,
         ]);
     }
 
@@ -41,7 +41,7 @@ class KelasController extends Controller
     {
         $guru  = Guru::find($id);
         $kelas = Kelas::find($id);
-        $input  = $request->all();
+        $input = $request->all();
         $kelas->fill($input)->save();
 
         return redirect()->route('kelas.index')->with('success', 'Data berhasil diupdate!');
@@ -56,9 +56,9 @@ class KelasController extends Controller
         return view('Admin/detail_kelas', ['resource'=>$resource, 'user' => Auth::user(), 'data' =>$data]);
     }
 
-     public function destroy($id)
+    public function destroy($id)
     {
-        $kelas     = Kelas::find($id);
+        $kelas = Kelas::find($id);
 
         $kelas->delete();
 
@@ -67,7 +67,7 @@ class KelasController extends Controller
 
     public function delete($id)
     {
-        $siswa     = KelasSiswa::find($id);
+        $siswa = KelasSiswa::find($id);
  
         $siswa->delete();
 
