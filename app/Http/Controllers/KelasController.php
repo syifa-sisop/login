@@ -48,10 +48,9 @@ class KelasController extends Controller
     }
 
     public function show($id){
-        $resource = Kelas::find($id);
-        
-        $this->model = new Kelas;
-        $data = $this->model->tampil_siswa($id);
+        $resource       = Kelas::find($id);
+        $this->model    = new Kelas;
+        $data           = $this->model->tampil_siswa($id);
 
         return view('Admin/detail_kelas', ['resource'=>$resource, 'user' => Auth::user(), 'data' =>$data]);
     }
@@ -59,18 +58,14 @@ class KelasController extends Controller
     public function destroy($id)
     {
         $kelas = Kelas::find($id);
-
         $kelas->delete();
-
         return redirect()->route('kelas.index')->with('success', 'Data berhasil dihapus!');
     }
 
     public function delete($id)
     {
         $siswa = KelasSiswa::find($id);
- 
         $siswa->delete();
-
         return redirect()->route('kelas.index')->with('success', 'Data berhasil dihapus!');
     }
 

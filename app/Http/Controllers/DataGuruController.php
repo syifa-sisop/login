@@ -40,7 +40,6 @@ class DataGuruController extends Controller
     {
         $gurus     = Guru::find($id);
         $gurus->delete();
-
         return redirect()->route('dataguru.index')->with('success', 'Data berhasil dihapus!');
     }
 

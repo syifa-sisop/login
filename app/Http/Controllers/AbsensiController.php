@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\KelasSiswa;
 use App\Models\Absensi;
 use App\Models\Kelas;
 
@@ -16,19 +15,20 @@ class AbsensiController extends Controller
         $this->model    = new Absensi;
         $data           = $this->model->tampil_absen();
 
-        return view('admin/listkelas', 
-            [
-                'kelas2'    =>$kelas2, 
-                'user'      => Auth::user(), 
-                'data'      => $data
-            ]);
+        return view('admin/listkelas')->with([
+            'kelas2'    =>$kelas2, 
+            'user'      => Auth::user(), 
+            'data'      => $data,
+        ]);
     }
 
     public function show($id)
     {
-
         $kelas2 = Kelas::find($id);
-        return view('admin/absensi',['kelas2'=>$kelas2,'user' => Auth::user()]);
+        return view('admin/absensi')->with([
+            'kelas2'    =>$kelas2,
+            'user'      => Auth::user(),
+        ]);
     }
 
     public function create(Request $request)
