@@ -11,7 +11,6 @@ class AbsensiController extends Controller
 {
      public function index()
      {
-
         $kelas2         = Kelas::paginate(5);
         $this->model    = new Absensi;
         $data           = $this->model->tampil_absen();

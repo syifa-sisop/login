@@ -52,5 +52,18 @@ class Siswa extends Model
         }
 
     }
+
+    public function update_data($request, $id)
+    {
+        $siswa  = Siswa::find($id);
+        $input  = $request->all();
+        $siswa->fill($input)->save();
+    }
+
+    public function delete_data($id)
+    {
+        $siswa = Siswa::find($id);
+        $siswa->delete();
+    }
 }
 
