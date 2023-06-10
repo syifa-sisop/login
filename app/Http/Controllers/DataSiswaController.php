@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Siswa;
 
-
 class DataSiswaController extends Controller
 {
     public function index(Request $request)
