@@ -33,23 +33,33 @@ class Absensi extends Model
                         'kelas.id',
                         'kelas.thn_masuk',
                         'kelas.thn_keluar',
-                        'gurus.nama'
-                    )
+                        'gurus.nama')
                     ->join('gurus', 'gurus.id', '=', 'kelas.wali_kelas')
                     ->get();
         return $data;
     }
 
+    public function pagination()
+    {
+        $list = Kelas::paginate(5);
+        return $list;
+    }
+
+    public function detail($id)
+    {
+        $kelas = Kelas::find($id);
+        return $kelas;
+    }
+
     public function tambah_data($request)
     {
-
         for($i=0;$i<count($request->siswa);$i++){
             
             $check = Absensi::where([
-                                    'id_siswa'  => $request->siswa[$i],
-                                    'id_kelas'  => $request->kelas, 
-                                    'tanggal'   => date('Y-m-d')
-                                    ])->get();
+                                'id_siswa'  => $request->siswa[$i],
+                                'id_kelas'  => $request->kelas, 
+                                'tanggal'   => date('Y-m-d')
+                                ])->get();
 
             if(count($check) == 0 && $request->status[$i] != "Hadir"){
                 
@@ -60,10 +70,9 @@ class Absensi extends Model
                 $absen->status      = $request->status[$i];
                 $absen->keterangan  = $request->status[$i];
                 $absen->save();
+
             }
-
         }
-
     }
 }
 

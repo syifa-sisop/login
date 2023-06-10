@@ -59,13 +59,8 @@
                     @endforeach
                   </tbody>
                 </table><br>
-                {{ $kelas2->links()}}
+                {{ $list->links()}}
                 <br>
-
-
-
-
-
-
       </div>
 @endsection
+section
