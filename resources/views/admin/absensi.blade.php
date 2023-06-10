@@ -32,9 +32,9 @@
         <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-primary">
-                <div class="panel-heading">Absensi Siswa Kelas  {{$kelas2->tingkat_kelas. "-".$kelas2->jurusan. " " .$kelas2->nama_kelas." (".(Carbon\Carbon::now('Asia/Jakarta')->format('d F Y')).")"}}</div>
+                <div class="panel-heading">Absensi Siswa Kelas  {{$kelas->tingkat_kelas. "-".$kelas->jurusan. " " .$kelas->nama_kelas." (".(Carbon\Carbon::now('Asia/Jakarta')->format('d F Y')).")"}}</div>
                 <form action="/absensi" method="post">
-                    <input type="hidden" name="kelas" value="{{$kelas2->id}}">
+                    <input type="hidden" name="kelas" value="{{$kelas->id}}">
                     {{ csrf_field() }}
                     <div class="panel-body">
                         <div class="table-responsive">
@@ -50,7 +50,7 @@
                                         </tr>
                                     </thead>
                                     <tbody id="isi">
-                                        @foreach ($kelas2->siswa as $index => $res)
+                                        @foreach ($kelas->siswa as $index => $res)
                                         
                                         <tr>
                                             <input type="hidden" name="siswa[]" value="{{$res->id}}">
@@ -60,8 +60,8 @@
                                             <td>{{ $res->nama}}</td>
                                             <td>
 
-                                                @if($kelas2->absen->count()!=0)
-                                                @foreach($kelas2->absen as $absen)
+                                                @if($kelas->absen->count()!=0)
+                                                @foreach($kelas->absen as $absen)
                                                     @if($absen->nisn==$res->nisn && $absen->pivot->tanggal==Carbon\Carbon::now('Asia/Jakarta')->format('Y-m-d'))
                                                         <p>{{$absen->pivot->status}}</p>
                                                         @break

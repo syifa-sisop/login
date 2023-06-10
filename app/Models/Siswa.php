@@ -38,7 +38,6 @@ class Siswa extends Model
 
     public function tambah_data($request)
     {
-
         $check = Siswa::where(['nisn' => $request->nisn])->get();
         if($check->count()>0){
             session()->flash('notif', array('success' => false, 'msgaction' => 'Tambah Data Gagal, Data Telah Ada!'));
@@ -49,10 +48,22 @@ class Siswa extends Model
             'nisn'          => 'required',
             'jenis_kelamin' => 'required'
         ]);
-        // simpan
         Siswa::create($request->all());
         }
 
+    }
+
+    public function update_data($request, $id)
+    {
+        $siswa  = Siswa::find($id);
+        $input  = $request->all();
+        $siswa->fill($input)->save();
+    }
+
+    public function delete_data($id)
+    {
+        $siswa = Siswa::find($id);
+        $siswa->delete();
     }
 }
 

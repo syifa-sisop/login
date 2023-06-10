@@ -39,6 +39,18 @@ class Absensi extends Model
         return $data;
     }
 
+    public function pagination()
+    {
+        $list = Kelas::paginate(5);
+        return $list;
+    }
+
+    public function detail($id)
+    {
+        $kelas = Kelas::find($id);
+        return $kelas;
+    }
+
     public function tambah_data($request)
     {
         for($i=0;$i<count($request->siswa);$i++){
