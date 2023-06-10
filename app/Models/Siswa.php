@@ -12,6 +12,7 @@ class Siswa extends Model
         'nama',
         'nisn',
         'jenis_kelamin'
+        //'tingkat_kelas'
     ];
 
     public function kelas()
@@ -48,11 +49,25 @@ class Siswa extends Model
             'nama'          => 'required',
             'nisn'          => 'required',
             'jenis_kelamin' => 'required'
+            //'tingkat_kelas'  => 'required'
         ]);
         // simpan
         Siswa::create($request->all());
         }
 
+    }
+
+    public function update_data($request, $id)
+    {
+        $siswa  = Siswa::find($id);
+        $input  = $request->all();
+        $siswa->fill($input)->save();
+    }
+
+    public function delete_data($id)
+    {
+        $siswa = Siswa::find($id);
+        $siswa->delete();
     }
 }
 

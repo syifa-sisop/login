@@ -10,7 +10,6 @@ class DataSiswaController extends Controller
 {
     public function index(Request $request)
     {
-      
         $this->model   = new Siswa;
         $siswa         = $this->model->search($request);
 
@@ -29,23 +28,17 @@ class DataSiswaController extends Controller
 
     public function update(Request $request, $id)
     {
-        $siswa  = Siswa::find($id);
-        $input  = $request->all();
-        $siswa->fill($input)->save();
-
+        $this->model = new Siswa;
+        $this->model->update_data($request,$id);
         return redirect()->route('datasiswa')->with('success', 'Data berhasil diupdate!');
     }
 
     public function destroy($id)
     {
-        $siswa  = Siswa::find($id);
-        $siswa->delete();
-
+        $this->model = new Siswa;
+        $this->model->delete_data($id);
         return redirect()->route('datasiswa')->with('success', 'Data berhasil dihapus!');
     }
-
-
-    
 
 }
 
