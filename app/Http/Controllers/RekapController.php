@@ -11,9 +11,10 @@ class RekapController extends Controller
 {
     public function index()
     {
-        $kelas2         = Kelas::paginate(5);
         $this->model    = new Rekap;
+        $this->kelas    = new Kelas;
         $data           = $this->model->show();
+        $kelas2         = $this->kelas->pagination();
         
         return view('admin.rekap')->with([
             'user'      => Auth::user(),
