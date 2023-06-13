@@ -32,14 +32,19 @@ class Kelas extends Model
         return $this->belongsToMany('App\Models\Siswa', 'kelas_siswas', 'id_kelas', 'id_siswa')->withPivot('id');
     }
 
+    public function pagination()
+    {
+        $kelas2  = Kelas::paginate(5);
+        return $kelas2;
+    }
+
     public function show()
     {
         $data = DB::table('kelas')
                     ->select(
                         'kelas.nama_kelas',
                         'kelas.tingkat_kelas',
-                        'kelas.kuota',
-                        'kelas.id',
+                        'kelas.kuota','kelas.id',
                         'kelas.thn_masuk',
                         'kelas.thn_keluar',
                         'gurus.nama'
@@ -69,11 +74,11 @@ class Kelas extends Model
     public function tambah_data($request)
     {
         $check = Kelas::where([
-                            'tingkat_kelas' => $request->tingkat_kelas, 
-                            'nama_kelas'    => $request->nama_kelas, 
-                            'thn_masuk'     => $request->thn_masuk, 
-                            'thn_keluar'    => $request->thn_keluar
-                            ])->get();
+                    'tingkat_kelas' => $request->tingkat_kelas, 
+                    'nama_kelas'    => $request->nama_kelas, 
+                    'thn_masuk'     => $request->thn_masuk, 
+                    'thn_keluar'    => $request->thn_keluar
+                    ])->get();
 
         if($check->count()>0){
             session()->flash('notif', array('success' => false, 'msgaction' => 'Tambah Data Gagal, Data Telah Ada!'));
@@ -95,5 +100,25 @@ class Kelas extends Model
             }
           
         }
+    }
+
+    public function update_data($request, $id)
+    {
+        $guru  = Guru::find($id);
+        $kelas = Kelas::find($id);
+        $input = $request->all();
+        $kelas->fill($input)->save();
+    }
+
+    public function cari($id)
+    {
+        $resource = Kelas::find($id);
+        return $resource;
+    }
+
+    public function delete_data($id)
+    {
+        $kelas  = Kelas::find($id);
+        $kelas->delete();
     }
 }
