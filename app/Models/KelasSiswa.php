@@ -16,9 +16,10 @@ class KelasSiswa extends Model
     public function tambah_data($request)
     {
         $check = KelasSiswa::where([
-                                    'id_kelas' => $request->kelas, 
-                                    'id_siswa' => $request->siswa
-                                ])->get();
+                            'id_kelas' => $request->kelas, 
+                            'id_siswa' => $request->siswa
+                            ])->get();
+
         if($check->count()>0){
             session()->flash('notif', array('success' => false, 'msgaction' => 'Tambah Data Gagal, Data Telah Ada!'));
             return redirect('kelas.show');
@@ -27,7 +28,6 @@ class KelasSiswa extends Model
             $Siswa              = new KelasSiswa;
             $Siswa->id_siswa    = $request->siswa;
             $Siswa->id_kelas    = $request->kelas;
-            
             if($Siswa->save()){
                 session()->flash('notif', array('success' => true, 'msgaction' => 'Tambah Data Berhasil!'));
             }
@@ -36,5 +36,16 @@ class KelasSiswa extends Model
             }
             return redirect('kelas/'.$request->kelas);
         }
+    }
+
+    public function ambil_data()
+    {
+        $resource   = Siswa::get();
+        return $resource;
+    }
+
+    public function delete_data($id)
+    {
+        KelasSiswa::find($id)->delete();
     }
 }
