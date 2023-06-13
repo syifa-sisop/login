@@ -24,6 +24,12 @@ class Guru extends Model
         Guru::create($request->all());
     }
 
+    public function tampil_data()
+    {
+        $guru    = Guru::all();
+        return $guru;
+    }
+
     public function pagination()
     {
         $guru  = Guru::paginate(5);

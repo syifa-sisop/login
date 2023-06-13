@@ -6,19 +6,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Kelas;
 use App\Models\Guru;
-use App\Models\KelasSiswa;
 
 class KelasController extends Controller
 {
     public function index()
     {
-        $guru    = Guru::all();
-        $guru2   = Guru::all();
-        $kelas   = Kelas::all();
-        $kelas2  = Kelas::paginate(5);
-
         $this->model    = new Kelas;
+        $this->guru     = new Guru;
         $data           = $this->model->show();
+        $kelas2         = $this->model->pagination();
+        $guru           = $this->guru->tampil_data();
+        $guru2          = $this->guru->tampil_data();
         
         return view('admin.kelas')->with([
             'user'      => Auth::user(),
@@ -31,7 +29,6 @@ class KelasController extends Controller
 
     public function store(Request $request)
     {
-        
         $this->model = new Kelas;
         $this->model->tambah_data($request);
         return redirect()->route('kelas.index');
@@ -39,33 +36,27 @@ class KelasController extends Controller
 
     public function update(Request $request, $id)
     {
-        $guru  = Guru::find($id);
-        $kelas = Kelas::find($id);
-        $input = $request->all();
-        $kelas->fill($input)->save();
-
+        $this->model = new Kelas;
+        $this->model->update_data($request, $id);
         return redirect()->route('kelas.index')->with('success', 'Data berhasil diupdate!');
     }
 
-    public function show($id){
-        $resource       = Kelas::find($id);
+    public function show($id)
+    {
         $this->model    = new Kelas;
         $data           = $this->model->tampil_siswa($id);
-
-        return view('Admin/detail_kelas', ['resource'=>$resource, 'user' => Auth::user(), 'data' =>$data]);
+        $resource       = $this->model->cari($id);
+        return view('Admin/detail_kelas')->with([
+            'resource'  =>$resource, 
+            'user'      => Auth::user(), 
+            'data'      =>$data,
+        ]);
     }
 
     public function destroy($id)
     {
-        $kelas = Kelas::find($id);
-        $kelas->delete();
-        return redirect()->route('kelas.index')->with('success', 'Data berhasil dihapus!');
-    }
-
-    public function delete($id)
-    {
-        $siswa = KelasSiswa::find($id);
-        $siswa->delete();
+        $this->model = new Kelas;
+        $this->model->delete_data($id);
         return redirect()->route('kelas.index')->with('success', 'Data berhasil dihapus!');
     }
 
