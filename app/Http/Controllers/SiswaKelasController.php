@@ -4,18 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Siswa;
 use App\Models\KelasSiswa;
-use DB; 
 
 class SiswaKelasController extends Controller
 {
     public function show($id)
     {
-        $resource   = Siswa::get();
+        $this->model    = new KelasSiswa;
+        $resource       = $this->model->ambil_data();
         return view('Admin/SiswaKelas')->with([
-            'resource'  => $resource, 
-            'kelas'     => $id,
+            'resource'  =>$resource, 
+            'kelas'     =>$id,
             'user'      => Auth::user(),
         ]);
     }
@@ -29,7 +28,8 @@ class SiswaKelasController extends Controller
 
     public function delete($id)
     {
-        KelasSiswa::find($id)->delete();
+        $this->model = new KelasSiswa;
+        $this->model->delete_data($id);
         session()->flash('notif', array('success' => true, 'msgaction' => 'Hapus Data Berhasil!'));
         return redirect(url()->previous());
     }
