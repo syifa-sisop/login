@@ -65,5 +65,6 @@ class Siswa extends Model
         $siswa = Siswa::find($id);
         $siswa->delete();
     }
+
 }
 

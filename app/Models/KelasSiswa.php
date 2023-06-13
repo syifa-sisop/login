@@ -37,4 +37,15 @@ class KelasSiswa extends Model
             return redirect('kelas/'.$request->kelas);
         }
     }
+
+    public function ambil_data()
+    {
+        $resource   = Siswa::get();
+        return $resource;
+    }
+
+    public function delete_data($id)
+    {
+        KelasSiswa::find($id)->delete();
+    }
 }
