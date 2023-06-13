@@ -45,7 +45,6 @@
           @endif
           @endif
         </div>
-
           <!--<a href="{{ route('dataguru.create') }}" class="btn btn-primary">Add New</a><br><br>-->
 
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add">
@@ -65,16 +64,14 @@
                     </tr>
                   </thead>
                   <tbody>
-                    @foreach($kelas2 as $kelas)
+                    @foreach($data as $kelas)
                     <tr>
                       <td>{{ $loop->iteration }}</td>
                       <td>{{ $kelas->tingkat_kelas }}</td>
                       <td>{{ $kelas->nama_kelas }}</td>
                       <td>{{ $kelas->kuota }}</td>
                       <td>{{ $kelas->thn_masuk }}/{{ $kelas->thn_keluar }}</td>
-                       @foreach($data as $data)
-                      <td>{{ $data->nama }}</td>
-                      @endforeach
+                      <td>{{ $kelas->nama }}</td>
 
                       <td>
                         <a href="{{url('kelas/'.$kelas->id)}}"><button type="button" class="btn btn-success" > <i class="fas fa-eye"></i> Kelola</button></a>
@@ -273,7 +270,7 @@
               </button>
             </div>
             <div class="modal-body">
-              {!! Form::model($dt, ['method' => 'delete', 'route' => ['kelas.delete', $dt->id] ]) !!}
+              {!! Form::model($dt, ['method' => 'delete', 'route' => ['kelas.destroy', $dt->id] ]) !!}
                 <h6 class="text-center">Apakah Anda Yakin Untuk Menghapus Data Ini ?</h4>
               
 

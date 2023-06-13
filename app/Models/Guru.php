@@ -13,4 +13,33 @@ class Guru extends Model
         'nip',
         'jenis_kelamin'
     ];
+
+    public function tambah_data($request)
+    {
+        $request->validate([
+            'nama'          => 'required',
+            'nip'           => 'required',
+            'jenis_kelamin' => 'required'
+        ]);
+        Guru::create($request->all());
+    }
+
+    public function pagination()
+    {
+        $guru  = Guru::paginate(5);
+        return $guru;
+    }
+
+    public function update_data($request, $id)
+    {
+        $guru   = Guru::find($id);
+        $input  = $request->all();
+        $guru->fill($input)->save();
+    }
+
+    public function delete_data($id)
+    {
+        $gurus  = Guru::find($id);
+        $gurus->delete();
+    }
 }

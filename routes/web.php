@@ -7,6 +7,7 @@ use App\Http\Controllers\DataSiswaController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\LayoutController;
+use App\Http\Controllers\SiswaKelasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,21 +42,14 @@ Route::group(['middleware' => ['auth']], function(){
         Route::resource('kelas',KelasController::class);
         Route::resource('datasiswa',DataSiswaController::class);
         Route::resource('absensi',AbsensiController::class);
-        Route::patch('/update/{id}', ['as' => 'datasiswa.update', 'uses' => 'App\Http\Controllers\DataSiswaController@update']);
-        Route::delete('/destroy/{id}', ['as' => 'datasiswa.destroy', 'uses' => 'App\Http\Controllers\DataSiswaController@destroy']);
+        Route::resource('siswakelas',SiswaKelasController::class);
 
+        Route::delete('/delete/{id}',[KelasController::class, 'delete'])->name('delete');
 
-        Route::patch('/update/{id}', ['as' => 'dataguru.update', 'uses' => 'App\Http\Controllers\DataGuruController@update']);
-        Route::delete('/delete/{id}', ['as' => 'dataguru.delete', 'uses' => 'App\Http\Controllers\DataGuruController@delete']);
+        Route::get('datasiswa', [DataSiswaController::class,'index'])->name('datasiswa');
 
-        Route::post('/kelas/', 'App\Http\Controllers\KelasController@create');
-        Route::put('/kelas/', 'App\Http\Controllers\KelasController@update');
-        //Route::delete('/delete/{id}', 'App\Http\Controllers\KelasController@delete');
-
-        Route::delete('/delete/{id}', ['as' => 'kelas.delete', 'uses' => 'App\Http\Controllers\KelasController@delete']);
-
-        Route::get('datasiswa', [App\Http\Controllers\DataSiswaController::class,'index'])->name('datasiswa.search');
-        
+         Route::post('/absensi/','App\Http\Controllers\AbsensiController@create');
+    
         
     });
     Route::group(['middleware' => ['cekUserLogin:2']],function(){
