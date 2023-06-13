@@ -32,6 +32,12 @@ class Kelas extends Model
         return $this->belongsToMany('App\Models\Siswa', 'kelas_siswas', 'id_kelas', 'id_siswa')->withPivot('id');
     }
 
+    public function pagination()
+    {
+        $kelas2  = Kelas::paginate(5);
+        return $kelas2;
+    }
+
     public function show()
     {
         $data = DB::table('kelas')
@@ -94,5 +100,25 @@ class Kelas extends Model
             }
           
         }
+    }
+
+    public function update_data($request, $id)
+    {
+        $guru  = Guru::find($id);
+        $kelas = Kelas::find($id);
+        $input = $request->all();
+        $kelas->fill($input)->save();
+    }
+
+    public function cari($id)
+    {
+        $resource = Kelas::find($id);
+        return $resource;
+    }
+
+    public function delete_data($id)
+    {
+        $kelas  = Kelas::find($id);
+        $kelas->delete();
     }
 }
