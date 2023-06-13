@@ -5,19 +5,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Guru;
 
-
 class DataGuruController extends Controller
 {
     public function index()
-    {
-        $guru   = Guru::all();
-        $gurus  = Guru::paginate(5);
-        $guru2  = Guru::latest()->get();
-        
+    {   
+        $this->model    = new Guru;
+        $gurus           = $this->model->pagination();
+
         return view('admin.guru')->with([
             'user'  => Auth::user(),
             'gurus' => $gurus,
-            'guru2' => $guru2,
         ]);
     }
     public function store(Request $request)
@@ -29,18 +26,15 @@ class DataGuruController extends Controller
 
     public function update(Request $request, $id)
     {
-        $guru   = Guru::find($id);
-        $input  = $request->all();
-        $guru->fill($input)->save();
-
+        $this->model    = new Guru;
+        $data           = $this->model->update_data($request, $id);
         return redirect()->route('dataguru.index')->with('success', 'Data berhasil diupdate!');
     }
 
     public function destroy($id)
     {
-        $gurus  = Guru::find($id);
-        $gurus->delete();
-
+        $this->model    = new Guru;
+        $data           = $this->model->delete_data($id);
         return redirect()->route('dataguru.index')->with('success', 'Data berhasil dihapus!');
     }
 
