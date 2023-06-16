@@ -6,81 +6,61 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Kelas;
 use App\Models\Guru;
-use App\Models\KelasSiswa;
-use DB; 
 
 class KelasController extends Controller
 {
     public function index()
     {
-        $guru   = Guru::all();
-        $guru2   = Guru::all();
-        $kelas   = Kelas::all();
-        $kelas2  = Kelas::paginate(5);
-
-        $data = DB::table('kelas')
-                    ->join('gurus', 'gurus.id', '=', 'kelas.wali_kelas')
-                    ->get();
-        //$guru2 = Kelas::latest()->get();
+        $this->model    = new Kelas;
+        $this->guru     = new Guru;
+        $data           = $this->model->show();
+        $kelas2         = $this->model->pagination();
+        $guru           = $this->guru->tampil_data();
+        $guru2          = $this->guru->tampil_data();
         
         return view('admin.kelas')->with([
-            'user' => Auth::user(),
-            'kelas2' => $kelas2,
-            'guru'  => $guru,
-            'guru2' => $guru2,
-            'data'  => $data,
-           // 'guru2' => $guru2,
+            'user'      => Auth::user(),
+            'kelas2'    => $kelas2,
+            'guru'      => $guru,
+            'guru2'     => $guru2,
+            'data'      => $data,
         ]);
     }
-    public function create(Request $request)
-    {
-        $check = Kelas::where(['tingkat_kelas' => $request->tingkat_kelas, 
-            'nama_kelas' => $request->nama_kelas, 'thn_masuk' => $request->thn_masuk, 'thn_keluar' => $request->thn_keluar])->get();
-        if($check->count()>0){
-            session()->flash('notif', array('success' => false, 'msgaction' => 'Tambah Data Gagal, Data Telah Ada!'));
-            return redirect()->route('kelas.index');
-        }
-        else{
-            $Kelas = new Kelas;
-            $Kelas->tingkat_kelas = $request->tingkat_kelas;
-            $Kelas->nama_kelas = $request->nama_kelas;
-            $Kelas->kuota = $request->kuota;
-            $Kelas->thn_masuk = $request->thn_masuk;
-            $Kelas->thn_keluar = $request->thn_keluar;
-            $Kelas->wali_kelas = $request->wali_kelas;
-            if($Kelas->save()){
-                session()->flash('notif', array('success' => true, 'msgaction' => 'Tambah Data Berhasil!'));
-            }
-            else{
-                session()->flash('notif', array('success' => false, 'msgaction' => 'Tambah Data Gagal, Silahkan Ulangi!'));
-            }
-            return redirect()->route('kelas.index');
-        }
 
+    public function store(Request $request)
+    {
+        $this->model = new Kelas;
+        $this->model->tambah_data($request);
+        
+        return redirect()->route('kelas.index');
     }
 
     public function update(Request $request, $id)
     {
-        $guru  = Guru::find($id);
-        $kelas = Kelas::find($id);
-        $input  = $request->all();
-        $kelas->fill($input)->save();
-
+        $this->model = new Kelas;
+        $this->model->update_data($request, $id);
+        
         return redirect()->route('kelas.index')->with('success', 'Data berhasil diupdate!');
     }
 
-    public function delete($id)
+    public function show($id)
     {
-        $kelas     = Kelas::find($id);
-        $data = DB::table('kelas_siswas')
-                    ->join('kelas', 'kelas.id', '=', 'kelas_siswas.id_kelas')
-                    ->where('kelas.id', $id)
-                    ->get();
-
-        //$data->each()->delete();
-        $kelas->delete();
-
-        return redirect()->route('kelas.index')->with('success', 'Data berhasil dihapus!');
+        $this->model    = new Kelas;
+        $data           = $this->model->tampil_siswa($id);
+        $resource       = $this->model->cari($id);
+        
+        return view('Admin/detail_kelas')->with([
+            'resource'  =>$resource, 
+            'user'      => Auth::user(), 
+            'data'      =>$data,
+        ]);
     }
 
+    public function destroy($id)
+    {
+        $this->model = new Kelas;
+        $this->model->delete_data($id);
+        
+        return redirect()->route('kelas.index')->with('success', 'Data berhasil dihapus!');
+    }
 }
