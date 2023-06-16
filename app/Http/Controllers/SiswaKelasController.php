@@ -12,6 +12,7 @@ class SiswaKelasController extends Controller
     {
         $this->model    = new KelasSiswa;
         $resource       = $this->model->ambil_data();
+        
         return view('Admin/SiswaKelas')->with([
             'resource'  =>$resource, 
             'kelas'     =>$id,
@@ -23,13 +24,15 @@ class SiswaKelasController extends Controller
     {
         $this->model = new KelasSiswa;
         $this->model->tambah_data($request);
-        return redirect('kelas/'.$request->kelas);
+        
+        return redirect()->route('kelas/'.$request->kelas)->with('success', 'Data berhasil diupdate!');
     }
 
     public function delete($id)
     {
         $this->model = new KelasSiswa;
         $this->model->delete_data($id);
+        
         session()->flash('notif', array('success' => true, 'msgaction' => 'Hapus Data Berhasil!'));
         return redirect(url()->previous());
     }

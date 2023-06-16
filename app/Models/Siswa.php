@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Models;
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -32,7 +31,7 @@ class Siswa extends Model
                 }
             }]
         ])->paginate(5);
-
+        
         return $siswa;
     }
 
@@ -50,7 +49,6 @@ class Siswa extends Model
         ]);
         Siswa::create($request->all());
         }
-
     }
 
     public function update_data($request, $id)
@@ -65,6 +63,5 @@ class Siswa extends Model
         $siswa = Siswa::find($id);
         $siswa->delete();
     }
-
 }
 

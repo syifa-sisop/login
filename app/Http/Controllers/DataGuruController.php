@@ -17,10 +17,12 @@ class DataGuruController extends Controller
             'gurus' => $gurus,
         ]);
     }
+    
     public function store(Request $request)
     {
         $this->model    = new Guru;
         $data           = $this->model->tambah_data($request);
+        
         return redirect()->route('dataguru.index')->with('success', 'Data guru berhasil ditambahkan!');
     }
 
@@ -28,6 +30,7 @@ class DataGuruController extends Controller
     {
         $this->model    = new Guru;
         $data           = $this->model->update_data($request, $id);
+        
         return redirect()->route('dataguru.index')->with('success', 'Data berhasil diupdate!');
     }
 
@@ -35,7 +38,7 @@ class DataGuruController extends Controller
     {
         $this->model    = new Guru;
         $data           = $this->model->delete_data($id);
+        
         return redirect()->route('dataguru.index')->with('success', 'Data berhasil dihapus!');
     }
-
 }

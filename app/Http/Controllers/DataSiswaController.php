@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Siswa;
 
-
 class DataSiswaController extends Controller
 {
     public function index(Request $request)
@@ -24,6 +23,7 @@ class DataSiswaController extends Controller
     {
         $this->model = new Siswa;
         $this->model->tambah_data($request);
+        
         return redirect()->route('datasiswa')->with('success', 'Data berhasil ditambahkan!');
     }
 
@@ -31,6 +31,7 @@ class DataSiswaController extends Controller
     {
         $this->model = new Siswa;
         $this->model->update_data($request, $id);
+        
         return redirect()->route('datasiswa')->with('success', 'Data berhasil diupdate!');
     }
 
@@ -38,8 +39,8 @@ class DataSiswaController extends Controller
     {
         $this->model = new Siswa;
         $this->model->delete_data($id);
+        
         return redirect()->route('datasiswa')->with('success', 'Data berhasil dihapus!');
     }
-
 }
 

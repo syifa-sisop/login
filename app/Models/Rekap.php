@@ -40,6 +40,7 @@ class Rekap extends Model
                     ->join('siswas', 'siswas.id', '=', 'absensis.id_siswa')
                     ->where('absensis.id_kelas',$id)
                     ->get();
+       
         return $data;
     }
 

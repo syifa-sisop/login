@@ -24,7 +24,6 @@ class Absensi extends Model
 
     public function tampil_absen()
     {
-        
        $data = DB::table('kelas')
                     ->select(
                         'kelas.nama_kelas',
@@ -54,7 +53,6 @@ class Absensi extends Model
     public function tambah_data($request)
     {
         for($i=0;$i<count($request->siswa);$i++){
-            
             $check = Absensi::where([
                                 'id_siswa'  => $request->siswa[$i],
                                 'id_kelas'  => $request->kelas, 
@@ -62,7 +60,6 @@ class Absensi extends Model
                                 ])->get();
 
             if(count($check) == 0 && $request->status[$i] != "Hadir"){
-                
                 $absen              = new Absensi;
                 $absen->id_siswa    = $request->siswa[$i];
                 $absen->id_kelas    = $request->kelas;
@@ -70,7 +67,6 @@ class Absensi extends Model
                 $absen->status      = $request->status[$i];
                 $absen->keterangan  = $request->status[$i];
                 $absen->save();
-
             }
         }
     }

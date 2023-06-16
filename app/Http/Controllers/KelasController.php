@@ -31,6 +31,7 @@ class KelasController extends Controller
     {
         $this->model = new Kelas;
         $this->model->tambah_data($request);
+        
         return redirect()->route('kelas.index');
     }
 
@@ -38,6 +39,7 @@ class KelasController extends Controller
     {
         $this->model = new Kelas;
         $this->model->update_data($request, $id);
+        
         return redirect()->route('kelas.index')->with('success', 'Data berhasil diupdate!');
     }
 
@@ -46,6 +48,7 @@ class KelasController extends Controller
         $this->model    = new Kelas;
         $data           = $this->model->tampil_siswa($id);
         $resource       = $this->model->cari($id);
+        
         return view('Admin/detail_kelas')->with([
             'resource'  =>$resource, 
             'user'      => Auth::user(), 
@@ -57,7 +60,7 @@ class KelasController extends Controller
     {
         $this->model = new Kelas;
         $this->model->delete_data($id);
+        
         return redirect()->route('kelas.index')->with('success', 'Data berhasil dihapus!');
     }
-
 }

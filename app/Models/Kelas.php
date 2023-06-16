@@ -51,7 +51,6 @@ class Kelas extends Model
                     )
                     ->join('gurus', 'gurus.id', '=', 'kelas.wali_kelas')
                     ->get();
-
         return $data;
     }
 
@@ -97,8 +96,7 @@ class Kelas extends Model
             }
             else{
                 session()->flash('notif', array('success' => false, 'msgaction' => 'Tambah Data Gagal, Silahkan Ulangi!'));
-            }
-          
+            }          
         }
     }
 

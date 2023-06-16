@@ -36,6 +36,7 @@ class AbsensiController extends Controller
     {
         $this->model = new Absensi;  
         $this->model->tambah_data($request);
+        
         return redirect('/absensi');
     }
 }
