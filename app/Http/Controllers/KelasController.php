@@ -59,5 +59,4 @@ class KelasController extends Controller
         $this->model->delete_data($id);
         return redirect()->route('kelas.index')->with('success', 'Data berhasil dihapus!');
     }
-
 }

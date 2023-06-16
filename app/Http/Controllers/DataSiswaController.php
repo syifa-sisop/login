@@ -39,6 +39,5 @@ class DataSiswaController extends Controller
         $this->model->delete_data($id);
         return redirect()->route('datasiswa')->with('success', 'Data berhasil dihapus!');
     }
-
 }
 
