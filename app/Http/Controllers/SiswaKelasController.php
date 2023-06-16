@@ -32,8 +32,8 @@ class SiswaKelasController extends Controller
     {
         $this->model = new KelasSiswa;
         $this->model->delete_data($id);
-        
         session()->flash('notif', array('success' => true, 'msgaction' => 'Hapus Data Berhasil!'));
+        
         return redirect(url()->previous());
     }
 }
