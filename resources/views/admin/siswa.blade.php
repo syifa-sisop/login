@@ -48,10 +48,6 @@
           @endif
         </div>
 
-
-
-          <!--<a href="{{ route('dataguru.create') }}" class="btn btn-primary">Add New</a><br><br>-->
-
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambah">
                   Add New
                 </button><br><br>
@@ -66,8 +62,8 @@
                    <thead>
                                     <tr>
                                         <th colspan="6">
-                                          <form action="{{ route('datasiswa.search') }}" method="GET">
-                                            <input type="text" name="s" class="form-control" placeholder="Cari...">
+                                          <form action="{{ route('datasiswa') }}" method="GET">
+                                            <input type="search" name="s" class="form-control" placeholder="Cari...">
                                              </form>
                                         </th>  
                                     </tr>            
@@ -76,36 +72,31 @@
                       <th>NISN</th>
                       <th>Nama</th>
                       <th>Jenis Kelamin</th>
-                      <!--<th>Tingkat Kelas</th>-->
                       <th colspan="2">Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    @foreach($siswas as $siswa)
+                    @foreach($siswa as $murid)
                     <tr>
                       <td>{{ $loop->iteration }}</td>
-                      <td>{{ $siswa->nisn }}</td>
-                      <td>{{ $siswa->nama }}</td>
-                      <td>{{ $siswa->jenis_kelamin }}</td>
-                     <!-- <td>{{ $siswa->tingkat_kelas }}</td>-->
+                      <td>{{ $murid->nisn }}</td>
+                      <td>{{ $murid->nama }}</td>
+                      <td>{{ $murid->jenis_kelamin }}</td>
 
                       <td>
-                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#edit{{$siswa->id}}"> <i class="fas fa-edit"></i> Edit</button>
+                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#edit{{$murid->id}}"> <i class="fas fa-edit"></i> Edit</button>
                         
                       </td>
 
                       <td>
-                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete{{$siswa->id}}"> <i class="fas fa-trash"></i> Delete</button>
-                       
-                       
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete{{$murid->id}}"> <i class="fas fa-trash"></i> Delete</button>
                       </td>
-
                       
                     </tr>
                     @endforeach
                   </tbody>
                 </table><br>
-                {{ $siswas->links()}}
+                {{ $siswa->links()}}
                 <br>
         </div>
         <!-- /.card-body -->
@@ -164,7 +155,7 @@
       </div>
       <!-- /.modal -->
 
-@foreach($siswas as $siswa)
+@foreach($siswa as $siswa)
       <div class="modal fade" id="edit{{$siswa->id}}">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -175,7 +166,7 @@
               </button>
             </div>
             <div class="modal-body">
-              {!! Form::model($siswas, ['method' => 'patch', 'route' => ['datasiswa.update', $siswa->id] ]) !!}
+              {!! Form::model($siswa, ['method' => 'patch', 'route' => ['datasiswa.update', $siswa->id] ]) !!}
               <div class="mb-3">
                 {!! Form::label('nisn', 'NISN') !!}
                 {!! Form::text('nisn', $siswa->nisn, ['class' => 'form-control']) !!}
@@ -219,7 +210,7 @@
               </button>
             </div>
             <div class="modal-body">
-              {!! Form::model($siswas, ['method' => 'delete', 'route' => ['datasiswa.destroy', $siswa->id] ]) !!}
+              {!! Form::model($siswa, ['method' => 'delete', 'route' => ['datasiswa.destroy', $siswa->id] ]) !!}
                 <h6 class="text-center">Apakah Anda Yakin Untuk Menghapus Data Ini ?</h4>
               
 
